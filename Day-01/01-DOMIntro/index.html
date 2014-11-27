@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Intro</title>
+	<style>
+	.invalid {
+		border: 1px solid red;
+		background-color: lightpink;
+	}
+	</style>
+	<script type="text/javascript">
+		function greetUser(){
+			var vTxtName = document.getElementById("txtName");
+			var userName = vTxtName.value;
+			var greetMsg = userName + " , Welcome to the JavaScript world";
+			displayMessage(greetMsg);
+		}
+		function displayMessage(msg){
+			var vDivMessage = document.getElementById("divMessage");
+			vDivMessage.innerHTML = msg;
+			setTimeout(clearMessage, 3000);
+		}
+		function clearMessage(){
+			var vDivMessage = document.getElementById("divMessage");
+			vDivMessage.innerHTML = "";
+		}
+		function initialize(){
+			var vBtnGreet = document.getElementById("btnGreet");
+			vBtnGreet.addEventListener("click", greetUser);	
+		}
+		window.addEventListener("DOMContentLoaded", initialize);
+	</script>
+</head>
+<body>
+	<label for="txtName" accesskey="n">Name : </label>
+	<input type="text" name="" id="txtName" >
+	<input type="button" value="Greet" id="btnGreet">
+	<div id="divMessage"></div>
+</body>
+</html>

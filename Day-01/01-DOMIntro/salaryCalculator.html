@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Salary Calculator</title>
+	<style>
+	h1 {
+		border-top: 2px solid blue;
+		border-bottom: 2px solid blue;
+		background-color: lightblue;
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	.invalid {
+		border : 1px solid red;
+		background-color: lightpink;
+	}
+	label{
+		display : block;
+	}
+	div {
+		margin-top: 3px;
+	}
+	#divResult{
+		color : red;
+		font-size: 32px;
+		font-weight: bold;
+	}
+	</style>
+</head>
+<body>
+	<h1>Salary Calculator</h1>
+	<div><label for="txtBasic">Basic :</label><input type="text" name="" id="txtBasic"></div>
+	<div><label for="txtHra">Hra :</label><input type="text" name="" id="txtHra"></div>
+	<div><label for="txtDa">Da :</label><input type="text" name="" id="txtDa"></div>
+	<div>
+		<label for="rangeTax">Tax :</label>
+		<input type="range" name="" id="rangeTax" min="0" max="30" value="0">
+		<span id="spanTax">[Tax%]</span>
+	</div>
+	<div><input type="button" value="Calculate" id="btnCalculate"></div>
+	<div>
+		<div id="divResult">[Salary]</div>
+	</div>
+</body>
+</html>
