@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Salary Calculator</title>
 	<style>
+
 	h1 {
 		border-top: 2px solid blue;
 		border-bottom: 2px solid blue;
@@ -26,13 +27,67 @@
 		font-size: 32px;
 		font-weight: bold;
 	}
+	.errorMessage{
+		color : red;
+	}
 	</style>
+	<script>
+		function SalaryCalculator(){
+			this.basic = 0;
+			this.hra = 0;
+			this.da = 0;
+			this.tax = 0;
+			this.salary = 0;
+
+			this.calculate = function(){
+				var gross = this.basic + this.hra + this.da;
+				this.salary = gross * ((100-this.tax)/100);
+			}
+		}
+		
+
+
+		window.addEventListener("DOMContentLoaded", init);
+		var calculator = new SalaryCalculator();
+		function init(){
+			document.getElementById("btnCalculate").addEventListener("click", onBtnCalculateClick);
+			document.getElementById("rangeTax").addEventListener("change", onRangeTaxChange);
+			var allInputs = document.querySelectorAll("input[type='text']");
+			for(var i=0;i<allInputs.length;i++)
+				allInputs[i].addEventListener("blur", validate);
+		}
+		function validate(){
+			if (!isValid(this.value)){
+				this.classList.add("invalid");
+			} else {
+				this.classList.remove("invalid");
+			}
+		}
+		function isValid(value){
+			return value !== "" && !isNaN(value);
+		}
+		function onBtnCalculateClick(){
+			calculator.basic = parseInt(document.getElementById("txtBasic").value,10);
+			calculator.hra = parseInt(document.getElementById("txtHra").value,10);
+			calculator.da = parseInt(document.getElementById("txtDa").value,10);
+			calculator.tax = parseInt(document.getElementById("rangeTax").value,10);
+			calculator.calculate();	
+
+			document.getElementById("divResult").innerHTML = calculator.salary;
+
+		}
+		function onRangeTaxChange(){
+			var spanTax = document.getElementById("spanTax");
+			var tax = document.getElementById("rangeTax").value;
+			spanTax.innerHTML = tax + "%"; 
+		}
+	</script>
 </head>
 <body>
 	<h1>Salary Calculator</h1>
-	<div><label for="txtBasic">Basic :</label><input type="text" name="" id="txtBasic"></div>
-	<div><label for="txtHra">Hra :</label><input type="text" name="" id="txtHra"></div>
-	<div><label for="txtDa">Da :</label><input type="text" name="" id="txtDa"></div>
+	<div><label for="txtBasic">Basic :</label><input type="text" name="" id="txtBasic"><span class="errorMessage">Invalid input</span></div>
+	<div><label for="txtHra">Hra :</label><input type="text" name="" id="txtHra"><span class="errorMessage">Invalid input</span></div>
+	<div><label for="txtDa">Da :</label><input type="text" name="" id="txtDa"><span class="errorMessage">Invalid input</span></div>
 	<div>
 		<label for="rangeTax">Tax :</label>
 		<input type="range" name="" id="rangeTax" min="0" max="30" value="0">
