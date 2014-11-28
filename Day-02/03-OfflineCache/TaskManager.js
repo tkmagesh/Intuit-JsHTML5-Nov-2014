@@ -1,53 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Task Manager</title>
-	<style>
-	.completed {
-		text-decoration: line-through;
-		font-style: italic;
-		color : red;
-		font-weight: bold;
-	}
-	</style>
-	<script>
-	(function(){
+(function(){
 
-		var taskStorage = (function(){
-			var storage = window.sessionStorage;
-				
-			function addTask(taskName){
-				var newId = new Date().getTime().toString();
-				storage.setItem(newId,taskName);
-				return {
-					id : newId,
-					name : taskName
-				};
-			}
-
-			function getAllTasks(){
-				var result = [];
-				for(var i=0;i<storage.length;i++){
-					var taskId = storage.key(i);
-					var taskName = storage.getItem(taskId);
-					result.push({
-						id : taskId,
-						name : taskName
-					});
-				}
-				return result;
-			}
-			function removeTask(taskId){
-				storage.removeItem(taskId);
-			}
-			return {
-				add : addTask,
-				getAll : getAllTasks,
-				remove : removeTask
-			}
-		})();
-
+		
 		window.addEventListener("DOMContentLoaded", init);
 
 		function init(){
@@ -92,17 +45,3 @@
 			}
 		}
 	})();
-	</script>
-</head>
-<body>
-	<h1>Task Manager</h1>
-	<hr>
-	<label for="txtTask">Task :</label>
-	<input type="text" name="" id="txtTask">
-	<input type="button" value="Add Task" id="btnAdd">
-	<input type="button" value="Remove Completed" id="btnRemoveCompleted">
-	<ol id="olTaskList">
-		
-	</ol>
-</body>
-</html>
