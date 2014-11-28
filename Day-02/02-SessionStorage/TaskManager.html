@@ -15,7 +15,8 @@
 	(function(){
 
 		var taskStorage = (function(){
-			var storage = window.localStorage;
+			var storage = window.sessionStorage;
+			
 			function addTask(taskName){
 				var newId = new Date().getTime().toString();
 				storage.setItem(newId,taskName);
